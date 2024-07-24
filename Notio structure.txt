@@ -1,0 +1,46 @@
+Структура веб-приложения будет выглядеть примерно так (будут дальнейшие изменения/улучшения):
+notio/
+├── notes/
+│   ├── migrations/
+│   ├── templates/
+│   │   └── notes/
+│   │       ├── base.html
+│   │       ├── index.html
+│   │       ├── note_list.html
+│   │       ├── note_detail.html
+│   │       ├── note_form.html
+│   │       └── note_confirm_delete.html
+│   ├── static/
+│   │   └── notes/
+│   │       └── styles.css
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── users/
+│   ├── migrations/
+│   ├── templates/
+│   │   └── registration/
+│   │       ├── login.html
+│   │       ├── signup.html
+│   │       └── ...
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── notio/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── db.sqlite3
+└── manage.py
