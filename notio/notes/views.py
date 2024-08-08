@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect
 from .models import Note
 from .forms import NoteForm
 
@@ -20,10 +19,33 @@ def note_detail(request, note_id):
 
 def note_create(request):
     if request.method == 'POST':
-        form = NoteForm(request.POST)
-        if form.is_valid():
-            note = form.save()
-            return HttpResponseRedirect(note.get_absolute_url())
+        try:
+            form = NoteForm(request.POST)
+            new_note = form.save(commit=False)
+            new_note.user = request.user
+            new_note.save()
+            return redirect('note_list')
+        except ValueError:
+            return render(request, 'notes/note_create.html', {
+                "form": NoteForm(),
+                "error": "Переданы неверные данные. Попробуйте еще раз"})
     else:
-        form = NoteForm()
-    return render(request, 'notes/note_create.html', {'form': form})
+        return render(request, 'notes/note_create.html', {'form': NoteForm()})
+
+
+def note_update(request, note_id):
+    note = get_object_or_404(Note, pk=note_id)
+    if request.method == 'POST':
+        form = NoteForm(request.POST, instance=note)
+        if form.is_valid():
+            form.save()
+            return redirect('note_list')
+    else:
+        form = NoteForm(instance=note)
+    return render(request, 'notes/note_update.html', {'form': form})
+
+
+def note_delete(request, note_id):
+    note = get_object_or_404(Note, pk=note_id)
+    note.delete()
+    return redirect('note_list')
