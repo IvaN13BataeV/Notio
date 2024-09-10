@@ -2,6 +2,9 @@
 {% block content %}
 <h1>{{ note.title }}</h1>
 <p>{{ note.content }}</p>
+<p>Создано: {{ note.created_at }}</p>
+<p>Изменено: {{ note.updated_at }}</p>
+<p>Автор: {{ note.user }}</p>
 <a href="{% url 'note_update' note.id %}">Редактировать</a>
 <a href="{% url 'note_delete' note.id %}">Удалить</a>
 {% endblock %}

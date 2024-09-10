@@ -3,16 +3,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 <div class="menu">
     <div class="wrap">
         <ul>
-            <li class="logo">Пользователь: </li>
+            <li class="logo"><a href="{% url 'home' %}">Главная</a></li>
+            {% if request.user.is_authenticated %}
+            <li>Пользователь: {{ user.username }}</li>
+            <li>
+                <form action="{% url 'user-logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="top">Выйти</button>
+                </form>
+            </li>
             <li><a href="{% url 'note_list' %}">Список заметок</a></li>
-
+            {% else%}
+            <li><a href="{% url 'user-signup' %}">Зарегистрироваться</a></li>
+            <li><a href="{% url 'user-login' %}">Войти</a></li>
+            {% endif %}
         </ul>
     </div>
 </div>

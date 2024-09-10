@@ -26,11 +26,11 @@ def note_create(request):
             new_note.save()
             return redirect('note_list')
         except ValueError:
-            return render(request, 'notes/note_create.html', {
+            return render(request, 'notes/note_form.html', {
                 "form": NoteForm(),
                 "error": "Переданы неверные данные. Попробуйте еще раз"})
     else:
-        return render(request, 'notes/note_create.html', {'form': NoteForm()})
+        return render(request, 'notes/note_form.html', {'form': NoteForm()})
 
 
 def note_update(request, note_id):
@@ -47,5 +47,7 @@ def note_update(request, note_id):
 
 def note_delete(request, note_id):
     note = get_object_or_404(Note, pk=note_id)
-    note.delete()
-    return redirect('note_list')
+    if request.method == 'POST':
+        note.delete()
+        return redirect('note_list')
+    return render(request, 'notes/note_confirm_delete.html', {'note': note})
