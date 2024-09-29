@@ -1,7 +1,7 @@
 {% extends 'notes/base.html' %}
 
 {% block content %}
-  <h1>Создать заметку</h1>
+  <h1 class="header">Создать заметку</h1>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

@@ -1,12 +1,16 @@
 {% extends 'notes/base.html' %}
 {% block content %}
-<h1>Список заметок</h1>
+<h1 class="header">Список заметок</h1>
     <ul>
         {% for note in notes %}
-            <li>
+        {% if notes %}
+            <li class="element">
                 <a href="{% url 'note_detail' note.id %}">{{ note.title }}</a>
             </li>
+        {% else %}
+            <li>Заметки пока отсутствуют</li>
+        {% endif %}
         {% endfor %}
     </ul>
-    <a href="{% url 'note_form' %}">Создать заметку</a>
+    <button type="submit"><a href="{% url 'note_form' %}">Создать заметку</a></button>
 {% endblock %}

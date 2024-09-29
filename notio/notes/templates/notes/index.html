@@ -2,5 +2,7 @@
 {% block content %}
 <h1>Notio</h1>
 <h2>Ваши заметки в надежном месте!</h2>
+{% if request.user.is_authenticated %}
 <a href="{% url 'note_form' %}">Создать заметку</a>
+{% endif %}
 {% endblock %}
