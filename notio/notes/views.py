@@ -1,17 +1,33 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Note
+from .models import Note, Category
 from .forms import NoteForm
 from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    return render(request, 'notes/index.html')
+    context = {
+        "title": "Главная"
+    }
+    return render(request, 'notes/index.html', context)
 
 
 @login_required
 def note_list(request):
     notes = Note.objects.all().order_by('-created_at')
     return render(request, 'notes/note_list.html', {'notes': notes})
+
+
+@login_required
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request, 'notes/category_list.html', {'categories': categories})
+
+
+@login_required
+def notes_by_category(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    notes = Note.objects.filter(category=category, user=request.user).order_by('-created_at')
+    return render(request, 'notes/notes_by_category.html', {'category': category, 'notes': notes})
 
 
 @login_required

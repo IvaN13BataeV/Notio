@@ -1,11 +1,25 @@
 {% extends 'notes/base.html' %}
-{% block content %}
-<h1 class="header">{{ note.title }}</h1>
 
-<p class="text">{{ note.content }}</p>
+{% block title %} {{ note.title }} {% endblock %}
+
+{% block content %}
+<div class="text">
+    <h1 class="header">{{ note.title }}</h1>
+
+    {% if note.picture %}
+        <img src="{{ note.picture.url }}">
+    {% endif %}
+
+    {{ note.content }}
+</div>
+
+<p><b><i>Категория: {{ note.category.name }}</i></b></p>
+
 <p><i>Создано: {{ note.created_at }} <br>
 Изменено: {{ note.updated_at }}</i></p>
-<p>Автор: <span>{{ note.user }}</span></p>
-<a href="{% url 'note_update' note.id %}">Редактировать</a>
-<a href="{% url 'note_delete' note.id %}">Удалить</a>
+
+<a href="{% url 'note_update' note.id %}"><span style="color: yellow; font-weight: bold">Редактировать</span></a>
+<br>
+<a href="{% url 'note_delete' note.id %}"><span style="color: red; font-weight: bold">Удалить</span></a>
+
 {% endblock %}

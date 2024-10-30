@@ -1,0 +1,18 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+
+<h2>Ваш профиль</h2>
+
+{% if profile.avatar %}
+    <img src="{{ profile.avatar.url }}">
+{% endif %}
+
+<p>Имя: {{ profile.name }}</p>
+<p>Возраст: {{ profile.age }}</p>
+<p>Эл.почта: {{ profile.email }}</p>
+<p>Создан: {{ profile.created }}</p>
+
+<a href="{% url 'edit_profile' %}">Изменить профиль</a>
+
+{% endblock %}

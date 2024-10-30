@@ -1,10 +1,13 @@
 {% extends 'notes/base.html' %}
 
 {% block content %}
-  <h1 class="header">Создать заметку</h1>
-  <form method="post" enctype="multipart/form-data">
+
+<h2>Изменение профиля</h2>
+
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button class="save" type="submit">Сохранить</button>
-  </form>
+</form>
+
 {% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'notes/base.html' %}
+{% load static %}
+{% block content %}
+<h2>Заметки в категории: {{ category.name }}</h2>
+
+{% if notes %}
+    <ul class="notes">
+        {% for note in notes %}
+             <li class="element">
+                <img width="40" height="40" src="{% static 'notes/note.png' %}">
+                <a href="{% url 'note_detail' note.id %}"><strong>{{ note.title }}</strong></a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>В категории заметок не найдено.</p>
+{% endif %}
+
+<a href="{% url 'category_list' %}">Назад в Категории</a>
+{% endblock %}

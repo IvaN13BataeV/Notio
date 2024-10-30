@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{{ title }}{% endblock %}</title>
+    <title>{% block title %}Notio{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'notes/favicon.ico' %}">
 </head>
 <body>
 <div class="menu">
     <div class="wrap">
-        <ul>
+        <ul class="top">
             <li class="logo"><a href="{% url 'home' %}">Главная</a></li>
             {% if request.user.is_authenticated %}
-            <li><a href="{% url 'note_list' %}">Список заметок</a></li>
+            <li><a href="{% url 'note_list' %}">Ваши заметки</a></li>
             <div class="auth">
-                <div class="user">Пользователь: <i>{{ user.username }}</i></div>
+                <div
+                        class="user"><a class="profile" href="{% url 'profile' %}">Пользователь:
+                    <i>{{ user.username }}</i></a></div>
                 <form action="{% url 'user-logout' %}" method="post">
                     {% csrf_token %}
-                    <button class="top">Выйти</button>
+                    <button class="out">Выйти</button>
                 </form>
             </div>
             {% else%}
             <li><a href="{% url 'user-signup' %}">Зарегистрироваться</a></li>
             <li><a href="{% url 'user-login' %}">Войти</a></li>
-
             {% endif %}
         </ul>
     </div>

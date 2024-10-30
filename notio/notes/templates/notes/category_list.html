@@ -1,0 +1,15 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+
+<h2>Категории заметок</h2>
+
+<ul class="notes">
+    {% for category in categories %}
+        <li class="element">
+            <a href="{% url 'notes_by_category' category.id %}">{{ category.name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
