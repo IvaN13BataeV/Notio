@@ -16,6 +16,8 @@ def user_signup(request):
             login(request, user)
             messages.success(request, 'Вы успешно зарегистрировались!')
             return redirect('home')
+        else:
+            messages.error(request, 'Ошибка регистрации!')
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -29,6 +31,8 @@ def user_login(request):
             login(request, user)
             messages.success(request, 'Вы успешно авторизовались!')
             return redirect('home')
+        else:
+            messages.error(request, 'Ошибка авторизации!')
     else:
         form = UserLoginForm()
     return render(request, 'registration/login.html', {'form': form})
@@ -55,7 +59,7 @@ def edit_profile(request):
             messages.success(request, 'Профиль изменен!')
             return redirect('profile')
         else:
-            messages.error(request, 'Ошибка при изменении профиля ')
+            messages.error(request, 'Ошибка при изменении профиля!')
     else:
         form = ProfileForm(instance=request.user.profile)
     return render(request, 'account/profile_update.html', {'form': form})

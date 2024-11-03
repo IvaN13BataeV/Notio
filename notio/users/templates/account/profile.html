@@ -4,15 +4,18 @@
 
 <h2>{{ profile.user }}</h2>
 
-{% if profile.avatar %}
+<div class="profiledata">
+    {% if profile.avatar %}
     <img height="100" src="{{ profile.avatar.url }}">
-{% endif %}
+    {% endif %}
 
     <p>Имя: <strong>{{ profile.name }}</strong></p>
     <p>Возраст: <strong>{{ profile.age }}</strong></p>
     <p>Эл.почта: <strong>{{ profile.email }}</strong></p>
     <p>Создан: {{ profile.created }}</p>
+</div>
 
 <a href="{% url 'edit_profile' %}">Изменить профиль</a>
+
 
 {% endblock %}

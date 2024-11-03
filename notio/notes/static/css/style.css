@@ -58,9 +58,19 @@ a:hover, .in:hover, .out:hover, .save:hover, .del:hover{
     color: #d91567;
 }
 
-input, textarea{
+input{
+    font-size: 16px;
     background: #fbe5b9;
     width: 30%;
+    padding: 10px 10px;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+
+textarea{
+    font-size: 15px;
+    background: #fbe5b9;
+    width: 70%;
     padding: 10px 10px;
     box-sizing: border-box;
     border-radius: 6px;
@@ -89,12 +99,14 @@ input, textarea{
 }
 
 .content .element{
+    margin-left: 30px;
     padding: 10px;
     background: #6cff8e;
     box-shadow: 0 2px 3px 2px #006638;
     margin-bottom: 20px;
     font-size: 20px;
     border-radius: 4px;
+    max-width: 60%;
 }
 
 .header{
@@ -106,7 +118,7 @@ input, textarea{
     text-align: justify;
     font-size: 22px;
     margin: 20px 0px;
-    padding: 2px 10px;
+    padding: 2px 20px;
     border: #003366;
     box-shadow: 0 2px 5px 2px #003366;
     background: #6cff8e;
@@ -115,7 +127,6 @@ input, textarea{
 .text img{
     max-width: 500px;
     /* float: left; */
-    margin-left: 10px;
     margin-right: 20px;
     margin-bottom: 10px;
     box-sizing: border-box;
@@ -176,15 +187,29 @@ h1{
 }
 
 .alert-success {
-    background-color: #d4edda;
-    color: #155724;
+    background-color: #adf1bd;
+    color: #2ba347;
 }
 
 .alert-error {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: #f3acb1;
+    color: #930f1c;
 }
 
 select{
+    font-size: 15px;
     background: #fbe5b9;
+}
+
+.profiledata{
+    border-radius: 6px;
+    border: 2px solid blue;
+    padding: 10px;
+    margin-bottom: 20px;
+    max-width: 30%;
+}
+
+.profiledata img{
+    border: 3px solid #4c3c3c;
+    border-radius: 10px;
 }
