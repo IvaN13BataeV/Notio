@@ -18,7 +18,7 @@ body{
 .wrap{
     max-width: 1200px;
     margin: 0 auto;
-    padding: 3px 10px;
+    padding: 3px 5px;
     box-sizing: border-box;    
 }
 
@@ -27,7 +27,7 @@ a{
     text-decoration: none;
 }
 
-a:hover, .out:hover, .save:hover{
+a:hover, .in:hover, .out:hover, .save:hover, .del:hover{
     color: #07a7cb;
 }
 
@@ -59,7 +59,8 @@ a:hover, .out:hover, .save:hover{
 }
 
 input, textarea{
-    width: 70%;
+    background: #fbe5b9;
+    width: 30%;
     padding: 10px 10px;
     box-sizing: border-box;
     border-radius: 6px;
@@ -68,14 +69,19 @@ input, textarea{
 .create{
     width: 200px;
     height: 50px;
-    background: #ffb115;
+    background: #ffd278;
     font-size: larger;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .in, .out, .save, .del{
-    background: #ffb115;
+    background: #ffd278;
     cursor: pointer;
-    color: #2fff5f;
+    color: #2f55ff;
+    border: #ab7d22 2px solid;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .content{
@@ -93,21 +99,31 @@ input, textarea{
 
 .header{
     color: #5b0dae;
+    font-size: 30px;
 }
 
 .text{
-    font-size: 18px;
-    margin: 10px;
-    padding: 2px 10px 10px 10px;
+    text-align: justify;
+    font-size: 22px;
+    margin: 20px 0px;
+    padding: 2px 10px;
     border: #003366;
     box-shadow: 0 2px 5px 2px #003366;
     background: #6cff8e;
 }
 
 .text img{
-    max-width: 30%;
-    float: left;
+    max-width: 500px;
+    /* float: left; */
+    margin-left: 10px;
     margin-right: 20px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.block{
+    display: flex;
+    align-items: center;
 }
 
 span{
@@ -132,4 +148,43 @@ h1{
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+.errorlist{
+    color: #bd0909;
+    font-weight: bold;
+}
+
+.helptext{
+    font-style: italic;
+    color: #4c3c3c;
+    font-size: 14px;
+}
+
+.error{
+    color: #c83838;
+}
+
+.messages{
+    text-align: center;
+}
+
+.alert {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+select{
+    background: #fbe5b9;
 }

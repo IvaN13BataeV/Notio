@@ -6,21 +6,21 @@
 
 <div class="heads">
     <h1 class="header">Список всех заметок</h1>
+    <button class="create" type="submit"><a href="{% url 'note_form' %}">Создать заметку</a></button>
     <a href="{% url 'category_list' %}"><h2>Заметки по категориям</h2></a>
 </div>
 
-    {% if notes %}
-        <ul class="notes">
-        {% for note in notes %}
-            <li class="element">
-                <img width="40" height="40" src="{% static 'notes/note.png' %}">
-                <a href="{% url 'note_detail' note.id %}"><strong>{{ note.title }}</strong></a>
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>Заметки пока отсутствуют =/ Создайте новую!</p>
-    {% endif %}
-<button class="create" type="submit"><a href="{% url 'note_form' %}">Создать заметку</a></button>
+{% if notes %}
+<ul class="notes">
+    {% for note in notes %}
+    <li class="element">
+        <img width="40" height="40" src="{% static 'notes/note.png' %}">
+        <a href="{% url 'note_detail' note.id %}"><strong>{{ note.title }}</strong></a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Заметки пока отсутствуют =/ Создайте новую!</p>
+{% endif %}
 
 {% endblock %}

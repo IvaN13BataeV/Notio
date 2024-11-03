@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Note, Category
 from .forms import NoteForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def index(request):
@@ -13,7 +14,7 @@ def index(request):
 
 @login_required
 def note_list(request):
-    notes = Note.objects.all().order_by('-created_at')
+    notes = Note.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'notes/note_list.html', {'notes': notes})
 
 
@@ -40,15 +41,17 @@ def note_detail(request, note_id):
 def note_create(request):
     if request.method == 'POST':
         try:
-            form = NoteForm(request.POST)
+            form = NoteForm(request.POST, request.FILES)
             new_note = form.save(commit=False)
             new_note.user = request.user
             new_note.save()
+            messages.success(request, 'Заметка создана успешно!')
             return redirect('note_list')
         except ValueError:
+            messages.error(request, 'Ошибка при создании заметки!')
             return render(request, 'notes/note_form.html', {
                 "form": NoteForm(),
-                "error": "Переданы неверные данные. Попробуйте еще раз"})
+                "error": "Поля заполнены неверно. Попробуйте еще раз"})
     else:
         return render(request, 'notes/note_form.html', {'form': NoteForm()})
 
@@ -57,10 +60,13 @@ def note_create(request):
 def note_update(request, note_id):
     note = get_object_or_404(Note, pk=note_id)
     if request.method == 'POST':
-        form = NoteForm(request.POST, instance=note)
+        form = NoteForm(request.POST, request.FILES, instance=note)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Заметка изменена успешно!')
             return redirect('note_list')
+        else:
+            messages.error(request, 'Ошибка при изменении заметки!')
     else:
         form = NoteForm(instance=note)
     return render(request, 'notes/note_update.html', {'form': form})
@@ -71,5 +77,6 @@ def note_delete(request, note_id):
     note = get_object_or_404(Note, pk=note_id)
     if request.method == 'POST':
         note.delete()
+        messages.success(request, 'Заметка удалена!')
         return redirect('note_list')
     return render(request, 'notes/note_confirm_delete.html', {'note': note})

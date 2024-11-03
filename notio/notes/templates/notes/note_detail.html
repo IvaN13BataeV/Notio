@@ -5,18 +5,18 @@
 {% block content %}
 <div class="text">
     <h1 class="header">{{ note.title }}</h1>
-
-    {% if note.picture %}
+    <div class="block">
+        {% if note.picture %}
         <img src="{{ note.picture.url }}">
-    {% endif %}
-
-    {{ note.content }}
+        {% endif %}
+        <p>{{ note.content }}</p>
+    </div>
 </div>
 
 <p><b><i>Категория: {{ note.category.name }}</i></b></p>
 
 <p><i>Создано: {{ note.created_at }} <br>
-Изменено: {{ note.updated_at }}</i></p>
+    Изменено: {{ note.updated_at }}</i></p>
 
 <a href="{% url 'note_update' note.id %}"><span style="color: yellow; font-weight: bold">Редактировать</span></a>
 <br>

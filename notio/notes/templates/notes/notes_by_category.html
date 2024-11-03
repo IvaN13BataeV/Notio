@@ -13,8 +13,8 @@
         {% endfor %}
     </ul>
 {% else %}
-    <p>В категории заметок не найдено.</p>
+    <p>В этой категории нет заметок.</p>
 {% endif %}
 
-<a href="{% url 'category_list' %}">Назад в Категории</a>
+<a href="{% url 'category_list' %}">Назад в <strong>Категории заметок</strong></a>
 {% endblock %}

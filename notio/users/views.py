@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, UserLoginForm, ProfileForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def user_signup(request):
@@ -13,7 +14,8 @@ def user_signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('note_list')
+            messages.success(request, 'Вы успешно зарегистрировались!')
+            return redirect('home')
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -25,7 +27,8 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('note_list')
+            messages.success(request, 'Вы успешно авторизовались!')
+            return redirect('home')
     else:
         form = UserLoginForm()
     return render(request, 'registration/login.html', {'form': form})
@@ -39,16 +42,20 @@ def user_logout(request):
 
 @login_required
 def profile(request):
-    return render(request, 'account/profile.html')
+    profile = request.user.profile
+    return render(request, 'account/profile.html', {'profile': profile})
 
 
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=request.user.profile)
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Профиль изменен!')
             return redirect('profile')
+        else:
+            messages.error(request, 'Ошибка при изменении профиля ')
     else:
         form = ProfileForm(instance=request.user.profile)
     return render(request, 'account/profile_update.html', {'form': form})
